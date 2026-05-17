@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_shop_category,shop.category user,model_shop_category,,1,1,1,1
+access_shop_product,shop.product user,model_shop_product,,1,1,1,1
+access_restock_product_wizard,restock.product.wizard,model_restock_product_wizard,,1,1,1,1
+access_sell_product_wizard,sell.product.wizard,model_sell_product_wizard,,1,1,1,1

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="restock_product_form" model="ir.ui.view">
+        <field name="name">restock.product.form</field>
+        <field name="model">restock.product.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Restock Product Wizard">
+                <group>
+                    <field name="product_id"/>
+                    <field name="qty_to_restock"/>
+                </group>
+                <footer>
+                    <button name="action_confirm"
+                            string="Restock"
+                            type="object"
+                            class="btn-primary"/>
+                    <button string="Cancel"
+                            class="btn-secondary"
+                            special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

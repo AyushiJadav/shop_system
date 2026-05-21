@@ -20,6 +20,39 @@
         </field>
     </record>
 
+<record id="view_shop_product_search" model="ir.ui.view">
+    <field name="name">shop.product.search</field>
+    <field name="model">shop.product</field>
+    <field name="arch" type="xml">
+        <search string="Search products">
+
+            <!-- Searchable fields (shown as autocomplete in the search bar) -->
+            <field name="name"/>
+            <field name="category"/>
+
+            <!-- Filters -->
+            <separator/>
+            <filter string="Low Stock" name="filter_low_stock"
+                domain="[('is_low_stock', '=', True)]"/>
+
+            <separator/>
+            <filter string="Under ₹500" name="filter_price_low"
+                domain="[('price', '&lt;=', 500)]"/>
+            <filter string="₹500 to ₹2000" name="filter_price_mid"
+                domain="[('price', '&gt;=', 500), ('price', '&lt;=', 2000)]"/>
+            <filter string="Over ₹2000" name="filter_price_high"
+                domain="[('price', '&gt;=', 2000)]"/>
+
+            <!-- Group By -->
+            <group expand="0" string="Group By">
+                <filter string="Category" name="group_by_category"
+                    context="{'group_by': 'category'}"/>
+            </group>
+
+        </search>
+    </field>
+</record>
+
     <record id="shop_product_list" model='ir.ui.view'>
         <field name="name">Shop product list</field>
         <field name="model">shop.product</field>

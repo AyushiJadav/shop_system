@@ -10,7 +10,7 @@ class ShopProduct(models.Model):
     price = fields.Float('Price')
     quantity = fields.Integer('Quantity')
     min_stock_level = fields.Integer('Mininum Stock Level')
-    is_low_stock = fields.Boolean('Low Quantity', compute="compute_low_qty")
+    is_low_stock = fields.Boolean('Low Quantity', compute="compute_low_qty", store=True)
 
     _sql_constraints = [('name', 'UNIQUE(name)', "Product with this name already exist."),]
     

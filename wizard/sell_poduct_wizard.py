@@ -12,4 +12,7 @@ class SellProductWizard(models.TransientModel):
         if self.qty_to_sell > self.product_id.quantity:
             raise UserError("Not enough stock.")
         self.product_id.quantity -= self.qty_to_sell
+        self.product_id.sold_count += self.qty_to_sell
+        return {'type': 'ir.actions.act_window_close'}
+
     

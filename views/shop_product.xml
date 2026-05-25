@@ -4,18 +4,35 @@
         <field name="name">Shop product Form</field>
         <field name="model">shop.product</field>
         <field name="arch" type="xml">
-            <form name="product_form">
+            <form string="Product Form">
                 <header>
-                    <button string = 'Sell' type='object' name='action_sell'/>
-                    <button string="Restock" type="object" name="action_restock"/>
+                    <button string="Sell"
+                            type="object"
+                            name="action_sell"/>
+
+                    <button string="Restock"
+                            type="object"
+                            name="action_restock"/>
                 </header>
-                <group> 
-                    <field name="name"/>
-                    <field name="category"/>
-                    <field name="price"/>
-                    <field name="quantity"/>
-                    <field name="min_stock_level"/>
-                </group>
+
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button"
+                                icon="fa-shopping-cart">
+                            <field name="sold_count"
+                                widget="statinfo"
+                                string="Units Sold"/>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="name"/>
+                        <field name="category"/>
+                        <field name="price"/>
+                        <field name="quantity"/>
+                        <field name="min_stock_level"/>
+                        <field name="total_inventory"/>
+                    </group>
+                </sheet>
             </form>
         </field>
     </record>
@@ -63,6 +80,7 @@
                 <field name="price"/>
                 <field name="quantity"/>
                 <field name="min_stock_level"/>
+                <field name="total_inventory"/>
             </list>
         </field>
     </record>

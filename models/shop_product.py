@@ -1,5 +1,5 @@
 from odoo import fields, models, api
-from odoo.exceptions import UserError
+# from odoo.exceptions import UserError
 
 class ShopProduct(models.Model):
     _name = 'shop.product'
@@ -11,6 +11,8 @@ class ShopProduct(models.Model):
     quantity = fields.Integer('Quantity')
     min_stock_level = fields.Integer('Mininum Stock Level')
     is_low_stock = fields.Boolean('Low Quantity', compute="compute_low_qty", store=True)
+    sold_count = fields.Integer('units sold',readonly = True)
+    total_inventory = fields.Float('Total Inventory', compute = 'compute_total_inventory', store = True, readonly=True)
 
     _sql_constraints = [('name', 'UNIQUE(name)', "Product with this name already exist."),]
     
@@ -37,4 +39,22 @@ class ShopProduct(models.Model):
     @api.depends('quantity', 'min_stock_level')
     def compute_low_qty(self):
         for i in self:
-            i.is_low_stock = i.quantity <= i.min_stock_level
+            i.is_low_stock = i.quantity < i.min_stock_level
+
+
+    @api.depends('price', 'quantity')
+    def compute_total_inventory(self):
+        for i in self:
+            i.total_inventory = i.price * i.quantity
+
+    def get_category_summary(self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True):
+        # Add latest running_balance in the read_group
+        result = self.read_group(
+            domain=[],
+            fields=['total_inventory:sum'],
+            groupby=['category']
+        ) 
+        for group in result:
+            print(group['category'], group['category_count'], group['total_inventory'])
+
+        return result

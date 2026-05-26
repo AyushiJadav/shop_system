@@ -13,6 +13,7 @@
     # Views
     'data': [
         'security/ir.model.access.csv',
+        'demo/demo.xml',
         'wizard/restock_product_wizard.xml',
         'wizard/sell_product_wizard.xml',
         'views/shop_category.xml',

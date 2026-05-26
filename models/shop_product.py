@@ -1,10 +1,8 @@
 from odoo import fields, models, api
-# from odoo.exceptions import UserError
 
 class ShopProduct(models.Model):
     _name = 'shop.product'
 
-    # id = fields.Integer('ID')
     name = fields.Char('Name')
     category = fields.Many2one('shop.category', string = 'Category')
     price = fields.Float('Price')
@@ -12,7 +10,7 @@ class ShopProduct(models.Model):
     min_stock_level = fields.Integer('Mininum Stock Level')
     is_low_stock = fields.Boolean('Low Quantity', compute="compute_low_qty", store=True)
     sold_count = fields.Integer('units sold',readonly = True)
-    total_inventory = fields.Float('Total Inventory', compute = 'compute_total_inventory', store = True, readonly=True)
+    total_inventory = fields.Float('Total Inventory', compute='compute_total_inventory', store=True, readonly=True)
 
     _sql_constraints = [('name', 'UNIQUE(name)', "Product with this name already exist."),]
     
@@ -48,7 +46,6 @@ class ShopProduct(models.Model):
             i.total_inventory = i.price * i.quantity
 
     def get_category_summary(self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True):
-        # Add latest running_balance in the read_group
         result = self.read_group(
             domain=[],
             fields=['total_inventory:sum'],
